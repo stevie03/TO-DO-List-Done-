@@ -68,5 +68,46 @@ async function toggleComplete(id, completed){
 });
 loadTasks();
 }
+function editTask(id) {
+    fetch(`${API_URL}/${id}`)
+        .then(response => response.json())
+        .then(task => {
+            const form = document.createElement('form');
+            form.innerHTML = `
+                <label>Cím: <input type="text" id="editTitle" value="${task.title}" /></label>
+                <label>Leírás: <input type="text" id="editDescription" value="${task.description}" /></label>
+                <label>Határidő: <input type="datetime-local" id="editDeadline" value="${task.deadline ? task.deadline.slice(0, 16) : ''}" /></label>
+                <label>Prioritás:
+                    <select id="editPriority">
+                        <option value="low" ${task.priority === "low" ? "selected" : ""}>Alacsony</option>
+                        <option value="medium" ${task.priority === "medium" ? "selected" : ""}>Közepes</option>
+                        <option value="high" ${task.priority === "high" ? "selected" : ""}>Magas</option>
+                    </select>
+                </label>
+                <button type="button" onclick="saveTask(${task.id})">Mentés</button>
+                <button type="button" onclick="loadTasks()">Mégse</button>
+            `;
+            document.getElementById("taskList").innerHTML = "";
+            document.getElementById("taskList").appendChild(form);
+        })
+        .catch(error => console.error("Error loading task for editing:", error));
+}
 
+async function saveTask(id) {
+    const title = document.getElementById("editTitle").value;
+    const description = document.getElementById("editDescription").value;
+    const deadline = document.getElementById("editDeadline").value || null;
+    const priority = document.getElementById("editPriority").value;
+
+    try {
+        await fetch(`${API_URL}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, description, deadline, priority, completed: false }),
+        });
+        loadTasks();
+    } catch (error) {
+        console.error('Error saving task:', error);
+    }
+}
 loadTasks();
