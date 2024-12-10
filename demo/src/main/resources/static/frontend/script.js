@@ -43,4 +43,30 @@ document.getElementById("taskForm").addEventListener("submit", async (e) => {
     loadTasks();
 });
 
+async function deleteTask(id) {
+    if (confirm("Biztosan törölni szeretnéd ezt a feladatot?")) {
+        await fetch(${API_URL}/${id}, { method: "DELETE" });
+        loadTasks();
+    } else {
+        console.log("Törlés megszakítva.");
+    }
+}
+
+// Feladat állapotának váltása
+async function toggleComplete(id, completed){
+    const response = await fetch(${API_URL}/${id});
+    const task = await response.json(); // Betöltjük az aktuális feladatot
+    await fetch(${API_URL}/${id}, {
+    method: "PUT",
+        headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        ...task, // Megtartjuk az eredeti adatokat
+        completed: !completed, // Frissítjük a completed mezőt
+    }),
+});
+loadTasks();
+}
+
 loadTasks();
