@@ -7,6 +7,11 @@ async function loadTasks() {
     console.log(tasks);
 
     const taskList = document.getElementById("taskList");
+    const PRIORITY_LABELS = {
+        low: "Alacsony",
+        medium: "Közepes",
+        high: "Magas"
+    };
     taskList.innerHTML = "";
 
     tasks.forEach(task => {
@@ -14,6 +19,7 @@ async function loadTasks() {
         li.className = task.completed ? "completed" : "";
         li.innerHTML = `
             <span>${task.title} - ${task.deadline} (${task.description})</span>
+            <span>Prioritás: ${PRIORITY_LABELS[task.priority] || "Ismeretlen"}</span>
             <div>
                 <button onclick="deleteTask(${task.id})">Törlés</button>
                 <button onclick="toggleComplete(${task.id}, ${task.completed})">

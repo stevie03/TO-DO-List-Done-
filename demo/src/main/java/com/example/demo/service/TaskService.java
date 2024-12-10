@@ -24,6 +24,9 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
+        if (task.getPriority() == null || task.getPriority().isEmpty()) {
+            task.setPriority("medium");
+        }
         return taskRepository.save(task);
     }
 
@@ -32,6 +35,7 @@ public class TaskService {
             task.setTitle(taskDetails.getTitle());
             task.setDescription(taskDetails.getDescription());
             task.setCompleted(taskDetails.isCompleted());
+            task.setPriority(taskDetails.getPriority());
             return taskRepository.save(task);
         }).orElseThrow(() -> new RuntimeException("Task not found"));
     }
