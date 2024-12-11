@@ -195,34 +195,6 @@ document.getElementById("taskForm").addEventListener("submit", async (e) => {
         console.error('Error adding task:', error);
     }
 });
-
-
-
-
-
-
-
-
-async function updateTask(id, updatedTask) {
-    try {
-        await fetch(`${API_URL}/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedTask),
-        });
-        loadTasks();
-    } catch (error) {
-        console.error('Error updating task:', error);
-    }
-}
-
-
-
-
-
-
 async function loadAchievements() {
     const response = await fetch(ACHIEVEMENT_URL);
     const achievements = await response.json();

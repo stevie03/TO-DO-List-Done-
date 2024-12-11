@@ -10,10 +10,11 @@
 <div class="container">
   <h1>To-Do List</h1>
 
-  <!-- Új feladat hozzáadása -->
+
   <form id="taskForm">
     <input type="text" id="taskTitle" placeholder="Teendő" required>
     <input type="text" id="taskDescription" placeholder="Megjegyzés">
+    <input type="datetime-local" id="taskDeadline" placeholder="Határidő">
     <select id="taskPriority">
       <option value="low">Alacsony</option>
       <option value="medium" selected>Közepes</option>
@@ -22,10 +23,12 @@
     <button type="submit">Teendő hozzáadás</button>
   </form>
 
-  <!-- Feladatok listája -->
-  <ul id="taskList"></ul>
-</div>
 
+  <ul id="taskList"></ul>
+
+  <h2>Achievementek</h2>
+  <ul id="achievementList"></ul>
+</div>
 
 <script src="script.js"></script>
 </body>

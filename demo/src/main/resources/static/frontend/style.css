@@ -11,6 +11,91 @@ body {
     height: 100vh;
 }
 
+li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    gap: 10px;
+}
+
+
+li .task-title {
+    flex: 2;
+    font-weight: bold;
+    word-break: break-word;
+}
+
+
+li .task-deadline {
+    flex: 1;
+    font-size: 14px;
+    color: #555;
+    text-align: right;
+}
+
+
+li .task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+
+li button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+
+li button.edit-btn {
+    color: #007BFF;
+}
+
+li button.edit-btn:hover {
+    color: #0056b3;
+}
+
+
+li button.delete-btn {
+    color: red;
+}
+
+li button.delete-btn:hover {
+    color: darkred;
+}
+
+
+@media (max-width: 600px) {
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    li .task-title, li .task-deadline {
+        flex: none;
+        width: 100%;
+    }
+
+    li .task-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    li button {
+        width: auto;
+    }
+}
+
+
 .container {
     background: #fff;
     padding: 20px;
@@ -79,3 +164,36 @@ li button {
 li button:hover {
     color: darkred;
 }
+#achievementList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#achievementList li {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#achievementList li.unlocked {
+    background-color: #d4edda;
+    color: #155724;
+    font-weight: bold;
+    border: 2px solid #c3e6cb;
+}
+
+#achievementList li.locked {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+form label {
+    display: block;
+    margin: 10px 0;
+}
+form label input, form label select {
+    width: 100%;
+    padding: 5px;
+}
+
